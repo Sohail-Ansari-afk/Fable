@@ -6,9 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:unit": "vitest run --project convex",
+    "test:e2e": "playwright test",
+    "test:all": "npm run test:unit && npm run test:e2e"
   },
   "dependencies": {
+    "@capacitor/core": "^8.4.1",
     "convex": "^1.41.0",
     "next": "16.2.9",
     "playwright": "^1.61.0",
@@ -16,6 +20,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.4.1",
     "@edge-runtime/vm": "^5.0.0",
     "@playwright/test": "^1.61.0",
     "@tailwindcss/postcss": "^4.3.1",
