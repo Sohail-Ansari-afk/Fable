@@ -1,17 +1,28 @@
 # AniClone Testing Infrastructure
 
-This directory contains the testing setup for the AniClone application.
+This directory houses tests and fixtures verifying the app frontend, backend logic, and scrapers.
 
-## Directory Structure
+## Test Tiers
 
-*   `testing/convex/`: Helper utilities, test mocks, fixtures, and databases for Convex backend unit tests.
-*   `testing/e2e/`: Playwright E2E browser tests targeting the static SPA build in `/out`.
-*   `convex/**/*.test.ts`: Unit tests are co-located next to the Convex functions they test.
+### 1. Unit Tests (CI & Local Safe)
+These tests compile and execute in isolation, never making real network requests. Mock data and fixtures are utilized instead.
 
-## Commands
+*   Run all unit tests: `npm run test:unit`
+*   Scope:
+    *   Convex schema integrity checks (`convex/schema.test.ts`)
+    *   Offline parser logic tests (`convex/sources/exampleSource.test.ts` using fixture files)
 
-| Command | Description |
-|---|---|
-| `npm run test:unit` | Runs the Vitest unit tests for the Convex backend in the edge runtime environment. |
-| `npm run test:e2e` | Runs E2E Playwright tests against the `/out` static export build. |
-| `npm run test:all` | Runs both unit and E2E tests sequentially. |
+### 2. Integration Tests (Manual Runs Only)
+These tests make live requests to external manga/anime sites. They must not run during the standard build or unit tests.
+
+*   Run integration tests manually:
+    ```bash
+    npm run test:integration
+    ```
+*   Scope:
+    *   External scraper connectivity and live CSS selector validations (`convex/sources/exampleSource.integration.test.ts`)
+
+### 3. E2E Tests (Browser Tests)
+These tests verify complete front-to-back functionality using Playwright against static production builds.
+
+*   Run all E2E tests: `npm run test:e2e`

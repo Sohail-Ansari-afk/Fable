@@ -8,8 +8,10 @@ export default defineConfig({
           name: "convex",
           environment: "node",
           include: ["convex/**/*.test.ts"],
+          exclude: ["convex/**/*.integration.test.ts", "**/node_modules/**", "**/dist/**"],
         },
       },
     ],
   },
 });
+
